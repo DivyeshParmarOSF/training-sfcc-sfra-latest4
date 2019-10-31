@@ -312,3 +312,9 @@ $negative-spacer: -0.625rem;
 .bonus-product-button {
     margin-right: 1.5em;
 }
+
+.cart-total-exceeds {
+    background-color: #ffff00;
+    display: table;
+    padding: 0.2em 0.8em;
+}

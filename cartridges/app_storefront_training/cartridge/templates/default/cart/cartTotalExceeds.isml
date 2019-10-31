@@ -1,6 +1,14 @@
-<div class="col-12 text-left grandTotal">
-    <isif condition="${pdict.currentBasketTotal > pdict.exceedsPrice }">
-        <isset name="exceedsPrice" value="${pdict.exceedsPrice}" scope="page"/>
-        <p class="cart-total-exceeds">${Resource.msgf('cart.total.exceeds','general', null, exceedsPrice)}</p>
-    </isif> 
-</div>
+     <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addCss('/css/cart/cart.css');
+    </isscript>
+
+    <div class="col-12 text-left grandTotal">
+        <isset name="exceedsPrice" value="${(pdict.exceedsPrice).toFixed(0)}" scope="page"/>
+        <isset name="totalBasketPrice" value="${(pdict.currentBasketTotal).toFixed(0)}" scope="page"/>
+
+        <isif condition="${totalBasketPrice > exceedsPrice }">
+            <p class="cart-total-exceeds">${Resource.msgf('cart.total.exceeds','general', null, exceedsPrice)}</p>
+        </isif> 
+    </div>
+
