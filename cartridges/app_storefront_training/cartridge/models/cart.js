@@ -99,6 +99,7 @@ function CartModel(basket) {
         this.actionUrls = getCartActionUrls();
         this.numOfShipments = basket.shipments.length;
         this.totals = totalsModel;
+        this.currentBasketTotal = basket.totalGrossPrice.value;
 
         if (shippingModels) {
             this.shipments = shippingModels.map(function (shippingModel) {
