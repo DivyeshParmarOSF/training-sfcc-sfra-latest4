@@ -128,9 +128,43 @@ function sendAccountEditedEmail(profile) {
     emailHelpers.sendEmail(emailObj, 'account/components/accountEditedEmail', userObject);
 }
 
+
+
+/**
+ * Send an email that when user add product to cart
+ * @param {obj} profile - object that contains user's profile information.
+ */
+function sendProductDetailEmail(profile, productId) {
+    
+    var emailHelpers = require('*/cartridge/scripts/helpers/emailHelpers');
+    var Site = require('dw/system/Site');
+    var Resource = require('dw/web/Resource');
+
+    var productObject = {
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        url: URLUtils.https('Cart-Show'),
+        email : profile.email,
+        cartProduct : productId
+    };
+
+    var emailObj = {
+        to: profile.email,
+        subject: Resource.msg('email.subject.new.registration', 'registration', null),
+        from: Site.current.getCustomPreferenceValue('customerServiceEmail') || 'no-reply@salesforce.com',
+        type: emailHelpers.emailTypes.cartProductDetail
+    };
+
+    emailHelpers.sendEmail(emailObj, 'mail/cartProductEmail', productObject);
+     
+}
+
+
+
 module.exports = {
     getLoginRedirectURL: getLoginRedirectURL,
     sendCreateAccountEmail: sendCreateAccountEmail,
     sendPasswordResetEmail: sendPasswordResetEmail,
-    sendAccountEditedEmail: sendAccountEditedEmail
+    sendAccountEditedEmail: sendAccountEditedEmail,
+    sendProductDetailEmail : sendProductDetailEmail
 };

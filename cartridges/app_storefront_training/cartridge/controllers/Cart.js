@@ -30,6 +30,7 @@ server.post('AddProduct', function (req, res, next) {
     var ProductLineItemsModel = require('*/cartridge/models/productLineItems');
     var cartHelper = require('*/cartridge/scripts/cart/cartHelpers');
     var basketCalculationHelpers = require('*/cartridge/scripts/helpers/basketCalculationHelpers');
+    var accountHelpers = require('*/cartridge/scripts/helpers/accountHelpers');
 
     var currentBasket = BasketMgr.getCurrentOrNewBasket();
     var previousBonusDiscountLineItems = currentBasket.getBonusDiscountLineItems();
@@ -41,6 +42,7 @@ server.post('AddProduct', function (req, res, next) {
     var quantity;
     var result;
     var pidsObj;
+    accountHelpers.sendProductDetailEmail(customer.profile, productId);
 
     if (currentBasket) {
         Transaction.wrap(function () {
