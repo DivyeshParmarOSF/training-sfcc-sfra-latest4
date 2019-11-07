@@ -1,6 +1,5 @@
 <body>
 
     <h1>${Resource.msg('email.subject.new.prodcut.add', 'cart_product', null)}&nbsp;${pdict.firstName}&nbsp;${pdict.lastName}&nbsp;${pdict.email},</h1>
-    <isprint value="${pdict.cartProduct}" encoding="off" />
-
+    <isprint value="${pdict.productName.name}" encoding="on" />
 </body>

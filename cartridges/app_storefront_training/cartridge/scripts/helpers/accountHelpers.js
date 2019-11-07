@@ -139,13 +139,15 @@ function sendProductDetailEmail(profile, productId) {
     var emailHelpers = require('*/cartridge/scripts/helpers/emailHelpers');
     var Site = require('dw/system/Site');
     var Resource = require('dw/web/Resource');
+    var Product = dw.catalog.ProductMgr.getProduct(productId);
 
     var productObject = {
         firstName: profile.firstName,
         lastName: profile.lastName,
         url: URLUtils.https('Cart-Show'),
         email : profile.email,
-        cartProduct : productId
+        cartProduct : productId,
+        productName : Product
     };
 
     var emailObj = {
