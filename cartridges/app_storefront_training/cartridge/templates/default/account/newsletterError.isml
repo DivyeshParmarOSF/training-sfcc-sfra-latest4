@@ -1,0 +1,5 @@
+<isdecorate template="common/layout/page">
+    <h1>An error occurred in your subscription.</h1>
+    Maybe the email ${pdict.email} already exists ?
+    Back to <a href="${URLUtils.url('Newsletter-Show')}">Newsletter Subscription</a>.
+</isdecorate>

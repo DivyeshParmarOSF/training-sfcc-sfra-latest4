@@ -1,0 +1,11 @@
+<body>
+
+    <isset name="firstName" value="${pdict.firstName}" scope="page"/>
+    <isset name="lastName" value="${pdict.lastName}" scope="page"/>
+    <h1>${Resource.msgf('newsletteremail.title.msg', 'login', null, firstName, lastName )}&nbsp;</h1>
+
+    <p>${Resource.msg('newsletteremail.msg.body1','login',null)}</p>
+    <isset name="couponCode" value="${pdict.couponCode}" scope="page"/>
+    <p>${Resource.msgf('newsletteremail.coupon.msg','login',null, couponCode)}</p>
+    
+</body>
