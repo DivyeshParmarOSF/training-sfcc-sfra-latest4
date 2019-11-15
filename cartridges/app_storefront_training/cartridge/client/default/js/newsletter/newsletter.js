@@ -3,7 +3,93 @@
 var formValidation = require('../components/formValidation');
 var createErrorNotification = require('../components/errorNotification');
 
+function getNewsletterModal() {
+    var htmlString = '<!-- Modal -->'
+        + '<div class="modal fade" id="NewsletterModal" tabindex="-1" role="dialog">'
+        + '<span class="enter-message sr-only" ></span>'
+        + '<div class="modal-dialog quick-view-dialog">'
+        + '<!-- Modal content-->'
+        + '<div class="modal-content">'
+        + '<div class="modal-header">'
+        + '<h3>Confirm Subscription</h3>'
+        + '    <button type="button" class="close pull-right" data-dismiss="modal">'
+        + '        <span aria-hidden="true">&times;</span>'
+        + '        <span class="sr-only"> </span>'
+        + '    </button>'
+        + '</div>'
+        + '<div class="modal-body">'
+        + '     <p>Please click OK to confrim your subscription</p>'
+        +'</div>'
+        + '<div class="modal-footer">'
+        + '     <button type="button" class="btn-cancel btn-primary btn btn-default pull-right" data-dismiss="modal">'
+        + '        <span aria-hidden="true">Cancel</span>'
+        + '    </button>'
+        + '     <button type="button" class="btn-success btn btn-default pull-right">'
+        + '        <span aria-hidden="true">Yes</span>'
+        + '    </button>'
+        + '</div>'
+        + '</div>'
+        + '</div>'
+        + '</div>';
+
+    
+    $('body').append(htmlString);
+    $('#NewsletterModal').modal({
+        backdrop: 'static',
+        keyboard: false
+    })
+} 
+function getAlertMsgError() {
+    var alertMsgError = '<!-Alert Message Failed ->'
+        + '<div class="alert alert-danger" role="alert">'
+        +   'Newsletter Regisgration Failed'
+        + '</div>';
+    $('form.newsletter').prepend(alertMsgError);
+}
+ 
 module.exports = {
+    newsletter: function() {
+        $('body').on('click',' #NewsletterModal .btn-success' , function(e) {     
+            var form = $('form.newsletter');
+            var url = form.attr('action');
+            form.spinner().start();
+            $('form.newsletter').trigger('submit');
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                data: form.serialize(),
+                success: function (data) {
+                    if (!data.success) {
+                        formValidation(form, data);
+                        $('form.newsletter').trigger('newsletter:error', data);
+                        $('#NewsletterModal').modal('hide');
+                        form.spinner().stop();
+                        getAlertMsgError();
+                    } else {
+                        form.spinner().start();
+                        $('form.newsletter').trigger('newsletter:success', data);
+                        location.href = data.redirectUrl;
+                    }
+                },
+                error: function (data) {
+                    if (data.redirectUrl) {
+                        location.href = data.redirectUrl;
+                    } else {
+                        $('form.newsletter').trigger('newsletter:error', data);
+                        form.spinner().stop();
+                    }
+                }
+            });
+            return false;
+        }),
+        $('form.newsletter').submit(function (e) {
+            e.preventDefault();
+            getNewsletterModal();
+            $('#NewsletterModal').modal('show');
+        });
+    },
+   
     login: function () {
         $('form.login').submit(function (e) {
             var form = $(this);

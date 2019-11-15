@@ -2,6 +2,7 @@
     <isscript>
         var assets = require('*/cartridge/scripts/assets.js');
         assets.addCss('/css/login.css');
+        assets.addJs('/js/newsletter.js');
     </isscript>
 
     <div class="hero slant-down login-banner">
@@ -42,7 +43,7 @@
                                         <div class="invalid-feedback" id="form-password-error"></div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-block btn-primary">${Resource.msg('button.text.newsletter', 'login', null)}</button>
+                                    <button type="submit" class="newsletter-submit btn btn-block btn-primary">${Resource.msg('button.text.newsletter', 'login', null)}</button>
                                 </form>
                             </div>
                         </div>

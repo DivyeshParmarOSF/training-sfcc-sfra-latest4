@@ -40,13 +40,21 @@ server.post('Subscribe', function (req, res, next) {
                 newsletter.custom.coupanCode = couponCode; 
             Transaction.commit();
             newsletterEmailHelpers.sendNewsletterEmail(formInfo,couponCode);
-            res.render('account/newsletterSuccess');
-            next();
+            res.json({
+                success: true,
+                redirectUrl: URLUtils.url('Home-Show').toString()                
+            });
+            // res.render('account/newsletterSuccess');
+        return next();
         } 
     } catch(e) {
         Transaction.rollback();
-        res.render('/account/newslettererror');
-        next();
+        res.json({
+            success: false,
+            redirectUrl: URLUtils.url('Newsletter-Show').toString()                
+        });
+        //res.render('/account/newsletterError');
+        return next();
     }
    
 });
