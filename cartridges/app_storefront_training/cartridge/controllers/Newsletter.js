@@ -45,7 +45,7 @@ server.post('Subscribe', function (req, res, next) {
         } 
     } catch(e) {
         Transaction.rollback();
-        res.render('/account/newslettererror');
+        res.render('/account/newsletterError');
         next();
     }
    
