@@ -1,0 +1,9 @@
+<isdecorate template="common/layout/page">
+    <isif condition="${pdict.flickrData.items.length}">
+        <div class="flickr-wrap">
+            <isloop items="${pdict.flickrData.items}" var="flickrImges">
+                <img src="${flickrImges.media.m}" alt=""/>
+            </isloop>
+        </div>
+    </isif>
+</isdecorate>
