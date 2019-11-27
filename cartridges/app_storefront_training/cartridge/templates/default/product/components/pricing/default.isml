@@ -13,6 +13,7 @@
                     <span class="sr-only">
                         ${Resource.msg('label.price.to', 'pricing', null)}
                     </span>
+                    <isset name="standardPrice" value="${price.decimalPrice}" scope="page" />
                 </span>
             </span>
         </del>
@@ -30,6 +31,12 @@
             <span class="value" content="${price.decimalPrice}">
         </isif>
         <isinclude template="/product/components/pricing/formatted" />
+        <div class="best-deal">
+            <isif condition="${standardPrice > price.decimalPrice && standardPrice !== null }"> 
+                <isset name="off" value="${(((standardPrice - (price.decimalPrice)) / standardPrice ) * 100).toFixed(0) }" scope="page" /> 
+                <span>${Resource.msgf('global.porducttile.bestdeal', 'product' , null, off)}</span>
+            </isif>
+        </div>
         </span>
     </span>
 </span>
