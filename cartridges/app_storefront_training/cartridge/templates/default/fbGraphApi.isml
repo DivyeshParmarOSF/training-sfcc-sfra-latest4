@@ -1,0 +1,11 @@
+<isdecorate template="common/layout/page">
+    <h2><a href="${pdict.loginurl}">Authenticate</a></h2>   
+    <isif condition="${pdict.userinfo.length !== 0}">         
+        ${Resource.msg('label.user.id','fbLbl', null)} : ${pdict.userinfo.id} <br/>
+        ${Resource.msg('label.user.name','fbLbl', null)} : ${pdict.userinfo.name}<br/>
+        ${Resource.msg('label.user.email','fbLbl', null)} : ${pdict.userinfo.email}<br/>
+        ${Resource.msg('label.user.birthday','fbLbl', null)} : ${pdict.userinfo.birthday}<br/>
+        ${Resource.msg('label.user.profile.photo','fbLbl', null)}<br/>
+        <img src="${pdict.userinfo.picture.data.url}" alt=""/>
+    </isif>
+</isdecorate>
