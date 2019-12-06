@@ -139,6 +139,9 @@
             <div class="recommendations">
                 <isslot id="product-recommendations-m" description="Recommended products" context="global" />
             </div>
+            <div class="row">
+                <isinclude template="product/productPrimayCategory" />
+            </div>
         </div>
     </isobject>
 </isdecorate>
